@@ -30,88 +30,88 @@
     <sys_id>f3849194294140b5ab16a6ac1088d52c</sys_id>
     <document>sys_atf_step</document>
     <document_key>4e971fefcba54b53b36d8be8edf9cf7c</document_key>
-    <value>(function () {
+    <value>;(function () {
     // Create a test incident with SAP keywords to match existing incidents
-    var inc = new GlideRecord('incident');
-    inc.initialize();
-    inc.setValue('short_description', 'SAP application is not accessible - ATF test');
-    inc.setValue('description', 'Unable to access the SAP application. Getting connection error.');
-    inc.setValue('priority', '1');
-    inc.setValue('impact', '1');
-    inc.setValue('urgency', '1');
-    inc.setValue('category', 'software');
-    var incId = inc.insert();
+    var inc = new GlideRecord('incident')
+    inc.initialize()
+    inc.setValue('short_description', 'SAP application is not accessible - ATF test')
+    inc.setValue('description', 'Unable to access the SAP application. Getting connection error.')
+    inc.setValue('priority', '1')
+    inc.setValue('impact', '1')
+    inc.setValue('urgency', '1')
+    inc.setValue('category', 'software')
+    var incId = inc.insert()
 
     if (!incId) {
-        throw new Error('Failed to create test incident');
+        throw new Error('Failed to create test incident')
     }
-    gs.info('ATF: Test incident created: ' + incId);
+    gs.info('ATF: Test incident created: ' + incId)
 
     try {
         // Run the investigation service
-        var svc = new x_293053_ai_inci_0.InvestigationService(incId);
+        var svc = new x_293053_ai_inci_0.InvestigationService(incId)
 
         // Test 1: getIncidentContext
-        var context = svc.getIncidentContext();
+        var context = svc.getIncidentContext()
         if (!context || !context.short_description) {
-            throw new Error('getIncidentContext() returned invalid data');
+            throw new Error('getIncidentContext() returned invalid data')
         }
-        gs.info('ATF: Incident context retrieved - ' + context.short_description);
+        gs.info('ATF: Incident context retrieved - ' + context.short_description)
 
         // Test 2: findSimilarIncidents
-        var similar = svc.findSimilarIncidents(5);
-        gs.info('ATF: Found ' + similar.length + ' similar incidents');
+        var similar = svc.findSimilarIncidents(5)
+        gs.info('ATF: Found ' + similar.length + ' similar incidents')
 
         // Test 3: searchKnowledgeArticles
-        var articles = svc.searchKnowledgeArticles(5);
-        gs.info('ATF: Found ' + articles.length + ' knowledge articles');
+        var articles = svc.searchKnowledgeArticles(5)
+        gs.info('ATF: Found ' + articles.length + ' knowledge articles')
 
         // Test 4: generateReport (full pipeline)
-        var reportId = svc.generateReport();
+        var reportId = svc.generateReport()
         if (!reportId) {
-            throw new Error('generateReport() did not return a report ID');
+            throw new Error('generateReport() did not return a report ID')
         }
-        gs.info('ATF: Investigation Report created: ' + reportId);
+        gs.info('ATF: Investigation Report created: ' + reportId)
 
         // Verify report record
-        var report = new GlideRecord('x_293053_ai_inci_0_inv_report');
+        var report = new GlideRecord('x_293053_ai_inci_0_inv_report')
         if (!report.get(reportId)) {
-            throw new Error('Could not retrieve investigation report');
+            throw new Error('Could not retrieve investigation report')
         }
 
-        var status = report.getValue('status');
+        var status = report.getValue('status')
         if (status !== 'completed') {
-            throw new Error('Report status is "' + status + '", expected "completed"');
+            throw new Error('Report status is "' + status + '", expected "completed"')
         }
 
-        var summary = report.getValue('summary');
+        var summary = report.getValue('summary')
         if (!summary) {
-            throw new Error('Report summary is empty');
+            throw new Error('Report summary is empty')
         }
 
-        var confidence = parseInt(report.getValue('confidence_score'), 10);
+        var confidence = parseInt(report.getValue('confidence_score'), 10)
         if (isNaN(confidence) || confidence &lt; 0 || confidence &gt; 100) {
-            throw new Error('Invalid confidence score: ' + confidence);
+            throw new Error('Invalid confidence score: ' + confidence)
         }
 
-        gs.info('ATF: ✅ ALL TESTS PASSED');
-        gs.info('ATF: Report Status: ' + status);
-        gs.info('ATF: Confidence Score: ' + confidence + '%');
-        gs.info('ATF: Similar Incidents: ' + similar.length);
-        gs.info('ATF: Knowledge Articles: ' + articles.length);
-        gs.info('ATF: Summary: ' + summary);
+        gs.info('ATF: ✅ ALL TESTS PASSED')
+        gs.info('ATF: Report Status: ' + status)
+        gs.info('ATF: Confidence Score: ' + confidence + '%')
+        gs.info('ATF: Similar Incidents: ' + similar.length)
+        gs.info('ATF: Knowledge Articles: ' + articles.length)
+        gs.info('ATF: Summary: ' + summary)
 
         // Cleanup report
-        report.deleteRecord();
+        report.deleteRecord()
     } finally {
         // Always cleanup test incident
-        var cleanup = new GlideRecord('incident');
+        var cleanup = new GlideRecord('incident')
         if (cleanup.get(incId)) {
-            cleanup.deleteRecord();
+            cleanup.deleteRecord()
         }
-        gs.info('ATF: Cleanup completed');
+        gs.info('ATF: Cleanup completed')
     }
-})();
+})()
 </value>
     <variable>989d9e235324220002c6435723dc3484</variable>
     <order>200</order>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="kb_knowledge">
+  <kb_knowledge action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>096709b32f41498a80592e42921b37e0</sys_id>
+    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>kb_knowledge_096709b32f41498a80592e42921b37e0</sys_update_name>
+    <kb_knowledge_base>a7e8a78bff0221009b20ffffffffff17</kb_knowledge_base>
+    <number>KB9990001</number>
+    <short_description>Troubleshooting SAP application access issues</short_description>
+    <text>&lt;p&gt;&lt;strong&gt;SAP Application Access Troubleshooting Guide&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;If you are unable to access the SAP application, follow these steps:&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;Verify network connectivity:&lt;/strong&gt; Ensure you can reach the SAP server by pinging sap-prod.company.com. Check that ports 3200-3399 are not blocked by your local firewall.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Check credentials:&lt;/strong&gt; Verify your SAP credentials are valid. If your password expired, reset it via the SAP Identity Management portal.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Clear browser cache:&lt;/strong&gt; SAP Web GUI can cache stale session tokens. Clear your browser cache and cookies, then try again.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Check SAP server status:&lt;/strong&gt; Visit the SAP System Status dashboard to confirm all modules are operational.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;VPN requirement:&lt;/strong&gt; If working remotely, ensure your VPN is connected before accessing SAP.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;If the issue persists after these steps, escalate to the SAP Basis team with your SAP client number and error screenshot.&lt;/p&gt;</text>
+    <workflow_state>published</workflow_state>
+  </kb_knowledge>
+</record_update>
