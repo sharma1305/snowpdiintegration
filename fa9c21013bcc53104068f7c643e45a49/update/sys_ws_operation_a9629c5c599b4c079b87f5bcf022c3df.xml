@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+  <sys_ws_operation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>a9629c5c599b4c079b87f5bcf022c3df</sys_id>
+    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_ws_operation_a9629c5c599b4c079b87f5bcf022c3df</sys_update_name>
+    <active>true</active>
+    <consumes>application/json</consumes>
+    <consumes_customized>false</consumes_customized>
+    <default_operation_uri>/api/x_293053_ai_inci_0/ai_investigation/report/{report_id}</default_operation_uri>
+    <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+    <http_method>GET</http_method>
+    <name>Get Report</name>
+    <operation_script><![CDATA[(function process(request, response) {
+    try {
+        var reportId = request.pathParams.report_id;
+
+        if (!reportId) {
+            response.setStatus(400);
+            response.setBody({ error: 'Missing report_id path parameter' });
+            return;
+        }
+
+        var gr = new GlideRecord('x_293053_ai_inci_0_inv_report');
+        if (!gr.get(reportId)) {
+            response.setStatus(404);
+            response.setBody({ error: 'Investigation report not found: ' + reportId });
+            return;
+        }
+
+        var report = {
+            sys_id: gr.getUniqueValue(),
+            number: gr.getValue('number') || '',
+            incident: gr.getValue('incident') || '',
+            incident_display: gr.getDisplayValue('incident') || '',
+            status: gr.getValue('status') || '',
+            summary: gr.getValue('summary') || '',
+            similar_incidents: gr.getValue('similar_incidents') || '',
+            knowledge_results: gr.getValue('knowledge_results') || '',
+            confidence_score: gr.getValue('confidence_score') || '0',
+            suggested_next_steps: gr.getValue('suggested_next_steps') || '',
+            sys_created_on: gr.getValue('sys_created_on') || '',
+            sys_updated_on: gr.getValue('sys_updated_on') || '',
+        };
+
+        response.setStatus(200);
+        response.setBody({ result: report });
+    } catch (e) {
+        gs.error('AI Investigation API: Error in getReport - ' + e);
+        response.setStatus(500);
+        response.setBody({ error: 'Internal server error: ' + e });
+    }
+})(request, response);
+]]></operation_script>
+    <operation_uri>/api/x_293053_ai_inci_0/v1/ai_investigation/report/{report_id}</operation_uri>
+    <produces>application/json</produces>
+    <produces_customized>false</produces_customized>
+    <relative_path>/report/{report_id}</relative_path>
+    <request_example/>
+    <requires_acl_authorization>true</requires_acl_authorization>
+    <requires_authentication>true</requires_authentication>
+    <requires_snc_internal_role>true</requires_snc_internal_role>
+    <short_description/>
+    <sys_policy/>
+    <web_service_definition>4c76e659a0434d379243aa42f845a578</web_service_definition>
+    <web_service_version>b8a1a768910c4fc682cbacb299ab6ecb</web_service_version>
+  </sys_ws_operation>
+</record_update>

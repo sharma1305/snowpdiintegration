@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+  <sys_ui_section caption="AI Findings" section_id="73eccb03dd4b46a7b3d5f4aefa947cec" sys_domain="global" table="x_293053_ai_inci_0_inv_report" view="">
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>similar_incidents</element>
+      <position>0</position>
+      <sys_id>dfca03a25d4a4e41b363f9cf970e0443</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="AI Findings" display_value="AI Findings" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">73eccb03dd4b46a7b3d5f4aefa947cec</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>knowledge_results</element>
+      <position>1</position>
+      <sys_id>de315b9b96f34c8d8e48e9f40ee01265</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="AI Findings" display_value="AI Findings" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">73eccb03dd4b46a7b3d5f4aefa947cec</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>suggested_next_steps</element>
+      <position>2</position>
+      <sys_id>0bc1a07b668040278e2edf1c4e356754</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="AI Findings" display_value="AI Findings" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">73eccb03dd4b46a7b3d5f4aefa947cec</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_section action="INSERT_OR_UPDATE" apply_defaults="true">
+      <caption>AI Findings</caption>
+      <header>false</header>
+      <name>x_293053_ai_inci_0_inv_report</name>
+      <roles/>
+      <sys_domain>global</sys_domain>
+      <sys_id>73eccb03dd4b46a7b3d5f4aefa947cec</sys_id>
+      <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+      <sys_user/>
+      <title>false</title>
+      <view_name/>
+      <view display_value="Default view" name="NULL">Default view</view>
+    </sys_ui_section>
+  </sys_ui_section>
+</record_update>

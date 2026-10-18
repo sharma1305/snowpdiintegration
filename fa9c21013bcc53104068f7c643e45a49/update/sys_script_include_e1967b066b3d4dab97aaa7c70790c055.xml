@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+  <sys_script_include action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>e1967b066b3d4dab97aaa7c70790c055</sys_id>
+    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_script_include_e1967b066b3d4dab97aaa7c70790c055</sys_update_name>
+    <access>public</access>
+    <active>true</active>
+    <api_name>x_293053_ai_inci_0.InvestigationService</api_name>
+    <caller_access/>
+    <client_callable>false</client_callable>
+    <description>AI-powered incident investigation service that finds similar incidents, searches knowledge articles, and generates investigation reports.</description>
+    <mobile_callable>false</mobile_callable>
+    <name>InvestigationService</name>
+    <sandbox_callable>false</sandbox_callable>
+    <script><![CDATA[var InvestigationService = Class.create()
+InvestigationService.prototype = {
+    initialize: function (incidentSysId) {
+        this.incidentSysId = incidentSysId
+        this.incidentGr = new GlideRecord('incident')
+        if (!this.incidentGr.get(incidentSysId)) {
+            gs.error('InvestigationService: Incident not found: ' + incidentSysId)
+            this.incidentGr = null
+        }
+    },
+
+    getIncidentContext: function () {
+        if (!this.incidentGr) {
+            return null
+        }
+        var gr = this.incidentGr
+        return {
+            sys_id: gr.getUniqueValue(),
+            short_description: gr.getValue('short_description') || '',
+            description: gr.getValue('description') || '',
+            category: gr.getValue('category') || '',
+            priority: gr.getValue('priority') || '',
+            state: gr.getValue('state') || '',
+            assignment_group: gr.getDisplayValue('assignment_group') || '',
+        }
+    },
+
+    findSimilarIncidents: function (limit) {
+        limit = limit || 5
+        if (!this.incidentGr) {
+            return []
+        }
+
+        var shortDesc = this.incidentGr.getValue('short_description') || ''
+        var keywords = this._extractKeywords(shortDesc)
+        if (keywords.length === 0) {
+            return []
+        }
+
+        var similar = []
+        var gr = new GlideRecord('incident')
+        gr.addQuery('sys_id', '!=', this.incidentSysId)
+        gr.addQuery('state', 'IN', '6,7') // resolved or closed
+        var qc = gr.addQuery('short_description', 'CONTAINS', keywords[0])
+        for (var i = 1; i < keywords.length; i++) {
+            qc.addOrCondition('short_description', 'CONTAINS', keywords[i])
+        }
+        gr.orderByDesc('sys_updated_on')
+        gr.setLimit(limit)
+        gr.query()
+
+        while (gr.next()) {
+            similar.push({
+                sys_id: gr.getUniqueValue(),
+                number: gr.getValue('number') || '',
+                short_description: gr.getValue('short_description') || '',
+                resolution_notes: gr.getValue('close_notes') || '',
+                close_notes: gr.getValue('close_notes') || '',
+                state: gr.getValue('state') || '',
+            })
+        }
+
+        return similar
+    },
+
+    searchKnowledgeArticles: function (limit) {
+        limit = limit || 5
+        if (!this.incidentGr) {
+            return []
+        }
+
+        var shortDesc = this.incidentGr.getValue('short_description') || ''
+        var keywords = this._extractKeywords(shortDesc)
+        if (keywords.length === 0) {
+            return []
+        }
+
+        var articles = []
+        var gr = new GlideRecord('kb_knowledge')
+        gr.addQuery('workflow_state', 'published')
+        var qc = gr.addQuery('short_description', 'CONTAINS', keywords[0])
+        for (var i = 1; i < keywords.length; i++) {
+            qc.addOrCondition('short_description', 'CONTAINS', keywords[i])
+            qc.addOrCondition('text', 'CONTAINS', keywords[i])
+        }
+        gr.orderByDesc('sys_updated_on')
+        gr.setLimit(limit)
+        gr.query()
+
+        while (gr.next()) {
+            var text = gr.getValue('text') || ''
+            if (text.length > 500) {
+                text = text.substring(0, 500) + '...'
+            }
+            articles.push({
+                sys_id: gr.getUniqueValue(),
+                number: gr.getValue('number') || '',
+                short_description: gr.getValue('short_description') || '',
+                text: text,
+            })
+        }
+
+        return articles
+    },
+
+    generateReport: function () {
+        if (!this.incidentGr) {
+            gs.error('InvestigationService: Cannot generate report - incident not loaded')
+            return null
+        }
+
+        // Create investigation report record
+        var report = new GlideRecord('x_293053_ai_inci_0_inv_report')
+        report.initialize()
+        report.setValue('incident', this.incidentSysId)
+        report.setValue('status', 'in_progress')
+        var reportSysId = report.insert()
+
+        if (!reportSysId) {
+            gs.error('InvestigationService: Failed to create investigation report')
+            return null
+        }
+
+        // Gather context
+        var context = this.getIncidentContext()
+        var similarIncidents = this.findSimilarIncidents(5)
+        var kbArticles = this.searchKnowledgeArticles(5)
+
+        // Build summary
+        var summary = 'AI Investigation Report for ' + this.incidentGr.getValue('number') + '\n'
+        summary += 'Short Description: ' + context.short_description + '\n'
+        summary += 'Category: ' + context.category + '\n'
+        summary += 'Priority: ' + context.priority + '\n'
+        summary += 'Similar Incidents Found: ' + similarIncidents.length + '\n'
+        summary += 'Knowledge Articles Found: ' + kbArticles.length
+
+        // Calculate confidence
+        var confidence = this._calculateConfidence(similarIncidents.length, kbArticles.length)
+
+        // Generate suggested next steps
+        var nextSteps = this._generateNextSteps(similarIncidents, kbArticles, context)
+
+        // Update the report
+        report = new GlideRecord('x_293053_ai_inci_0_inv_report')
+        if (report.get(reportSysId)) {
+            report.setValue('summary', summary)
+            report.setValue('similar_incidents', JSON.stringify(similarIncidents))
+            report.setValue('knowledge_results', JSON.stringify(kbArticles))
+            report.setValue('confidence_score', confidence)
+            report.setValue('suggested_next_steps', nextSteps)
+            report.setValue('status', 'completed')
+            report.update()
+        }
+
+        // Post work note to incident
+        var incGr = new GlideRecord('incident')
+        if (incGr.get(this.incidentSysId)) {
+            var workNote = '[code]<h3>AI Investigation Report</h3>\n'
+            workNote += '<b>Summary:</b> ' + summary + '\n\n'
+            workNote += '<b>Similar Incidents:</b> ' + similarIncidents.length + ' found\n'
+            for (var s = 0; s < similarIncidents.length; s++) {
+                workNote += '  - ' + similarIncidents[s].number + ': ' + similarIncidents[s].short_description + '\n'
+            }
+            workNote += '\n<b>Knowledge Articles:</b> ' + kbArticles.length + ' found\n'
+            for (var k = 0; k < kbArticles.length; k++) {
+                workNote += '  - ' + kbArticles[k].number + ': ' + kbArticles[k].short_description + '\n'
+            }
+            workNote += '\n<b>Confidence Score:</b> ' + confidence + '%\n'
+            workNote += '<b>Suggested Next Steps:</b>\n' + nextSteps + '[/code]'
+            incGr.work_notes = workNote
+            incGr.update()
+        }
+
+        return reportSysId
+    },
+
+    _extractKeywords: function (text) {
+        if (!text) {
+            return []
+        }
+        var stopWords = [
+            'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been',
+            'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will',
+            'would', 'could', 'should', 'may', 'might', 'can', 'shall',
+            'to', 'of', 'in', 'for', 'on', 'with', 'at', 'by', 'from',
+            'as', 'into', 'through', 'during', 'before', 'after', 'and',
+            'but', 'or', 'nor', 'not', 'so', 'yet', 'both', 'either',
+            'neither', 'each', 'every', 'all', 'any', 'few', 'more',
+            'most', 'other', 'some', 'such', 'no', 'only', 'own',
+            'same', 'than', 'too', 'very', 'just', 'because', 'it',
+            'its', 'this', 'that', 'these', 'those', 'i', 'me', 'my',
+            'we', 'our', 'you', 'your', 'he', 'him', 'his', 'she',
+            'her', 'they', 'them', 'their', 'what', 'which', 'who',
+            'when', 'where', 'why', 'how', 'if', 'then', 'else',
+            'about', 'up', 'out', 'off', 'over', 'under', 'again',
+            'further', 'once', 'here', 'there', 'also', 'new',
+        ]
+        var words = text.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/)
+        var keywords = []
+        for (var i = 0; i < words.length; i++) {
+            var word = words[i].trim()
+            if (word.length > 2 && stopWords.indexOf(word) === -1) {
+                keywords.push(word)
+            }
+        }
+        return keywords
+    },
+
+    _calculateConfidence: function (similarCount, kbCount) {
+        var score = 0
+        // Up to 40 points for similar incidents
+        if (similarCount >= 3) {
+            score += 40
+        } else if (similarCount >= 1) {
+            score += similarCount * 15
+        }
+        // Up to 40 points for knowledge articles
+        if (kbCount >= 3) {
+            score += 40
+        } else if (kbCount >= 1) {
+            score += kbCount * 15
+        }
+        // Base score of 20 for running the investigation
+        score += 20
+        // Cap at 100
+        return Math.min(score, 100)
+    },
+
+    _generateNextSteps: function (similarIncidents, kbArticles, context) {
+        var steps = []
+
+        if (similarIncidents.length > 0) {
+            steps.push('1. Review ' + similarIncidents.length + ' similar resolved incidents for applicable resolution patterns.')
+            steps.push('   Top match: ' + similarIncidents[0].number + ' - ' + similarIncidents[0].short_description)
+        } else {
+            steps.push('1. No similar resolved incidents found. Consider escalating for manual investigation.')
+        }
+
+        if (kbArticles.length > 0) {
+            steps.push('2. Review ' + kbArticles.length + ' relevant knowledge articles.')
+            steps.push('   Top article: ' + kbArticles[0].number + ' - ' + kbArticles[0].short_description)
+        } else {
+            steps.push('2. No relevant knowledge articles found. Consider creating a new KB article after resolution.')
+        }
+
+        steps.push('3. Validate findings with the assigned team (' + (context.assignment_group || 'unassigned') + ').')
+        steps.push('4. Update the incident with resolution steps based on investigation findings.')
+
+        return steps.join('\n')
+    },
+
+    type: 'InvestigationService',
+}
+]]></script>
+    <sys_name>InvestigationService</sys_name>
+  </sys_script_include>
+</record_update>

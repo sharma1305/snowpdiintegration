@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+  <sys_ws_operation action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>d60318b671cd41fd9ddd57abe8e2ddfa</sys_id>
+    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_ws_operation_d60318b671cd41fd9ddd57abe8e2ddfa</sys_update_name>
+    <active>true</active>
+    <consumes>application/json</consumes>
+    <consumes_customized>false</consumes_customized>
+    <default_operation_uri>/api/x_293053_ai_inci_0/ai_investigation/investigate/{incident_id}</default_operation_uri>
+    <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+    <http_method>POST</http_method>
+    <name>Trigger Investigation</name>
+    <operation_script><![CDATA[(function process(request, response) {
+    try {
+        var incidentId = request.pathParams.incident_id;
+
+        if (!incidentId) {
+            response.setStatus(400);
+            response.setBody({ error: 'Missing incident_id path parameter' });
+            return;
+        }
+
+        // Verify incident exists
+        var incGr = new GlideRecord('incident');
+        if (!incGr.get(incidentId)) {
+            response.setStatus(404);
+            response.setBody({ error: 'Incident not found: ' + incidentId });
+            return;
+        }
+
+        var investigator = new global.InvestigationService(incidentId);
+        var reportSysId = investigator.generateReport();
+
+        if (reportSysId) {
+            response.setStatus(200);
+            response.setBody({
+                result: {
+                    report_sys_id: reportSysId,
+                    status: 'completed',
+                    message: 'Investigation report generated successfully',
+                },
+            });
+        } else {
+            response.setStatus(500);
+            response.setBody({ error: 'Failed to generate investigation report' });
+        }
+    } catch (e) {
+        gs.error('AI Investigation API: Error in investigate - ' + e);
+        response.setStatus(500);
+        response.setBody({ error: 'Internal server error: ' + e });
+    }
+})(request, response);
+]]></operation_script>
+    <operation_uri>/api/x_293053_ai_inci_0/v1/ai_investigation/investigate/{incident_id}</operation_uri>
+    <produces>application/json</produces>
+    <produces_customized>false</produces_customized>
+    <relative_path>/investigate/{incident_id}</relative_path>
+    <request_example/>
+    <requires_acl_authorization>true</requires_acl_authorization>
+    <requires_authentication>true</requires_authentication>
+    <requires_snc_internal_role>true</requires_snc_internal_role>
+    <short_description/>
+    <sys_policy/>
+    <web_service_definition>4c76e659a0434d379243aa42f845a578</web_service_definition>
+    <web_service_version>b8a1a768910c4fc682cbacb299ab6ecb</web_service_version>
+  </sys_ws_operation>
+</record_update>

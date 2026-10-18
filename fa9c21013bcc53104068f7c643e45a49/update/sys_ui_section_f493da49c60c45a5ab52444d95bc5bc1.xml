@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+  <sys_ui_section caption="Investigation Details" section_id="f493da49c60c45a5ab52444d95bc5bc1" sys_domain="global" table="x_293053_ai_inci_0_inv_report" view="">
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>.begin_split</element>
+      <position>0</position>
+      <sys_id>77e7a2be0a8748c5bf4c162ce531a334</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type>.begin_split</type>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>number</element>
+      <position>1</position>
+      <sys_id>9e3a94e77379418d9388fd6a67cad500</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>incident</element>
+      <position>2</position>
+      <sys_id>d4f4ca9e295142bdadf69175e2d30d46</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>.split</element>
+      <position>3</position>
+      <sys_id>3bfefb2f367e41de8c24ae5606e2a520</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type>.split</type>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>status</element>
+      <position>4</position>
+      <sys_id>0809c526b3c04447831d2585251e5d98</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>confidence_score</element>
+      <position>5</position>
+      <sys_id>421699cf5b924dd69e6e6ac5a9c6133e</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>.end_split</element>
+      <position>6</position>
+      <sys_id>e420c41dee5645fcbc8fe691564a4638</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type>.end_split</type>
+    </sys_ui_element>
+    <sys_ui_element action="INSERT_OR_UPDATE" apply_defaults="true">
+      <element>summary</element>
+      <position>7</position>
+      <sys_id>1befe6231bde4db9a24b3f0a8a0db9df</sys_id>
+      <sys_ui_formatter/>
+      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+      <sys_user/>
+      <type/>
+    </sys_ui_element>
+    <sys_ui_section action="INSERT_OR_UPDATE" apply_defaults="true">
+      <caption>Investigation Details</caption>
+      <header>false</header>
+      <name>x_293053_ai_inci_0_inv_report</name>
+      <roles/>
+      <sys_domain>global</sys_domain>
+      <sys_id>f493da49c60c45a5ab52444d95bc5bc1</sys_id>
+      <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+      <sys_user/>
+      <title>false</title>
+      <view_name/>
+      <view display_value="Default view" name="NULL">Default view</view>
+    </sys_ui_section>
+  </sys_ui_section>
+</record_update>
