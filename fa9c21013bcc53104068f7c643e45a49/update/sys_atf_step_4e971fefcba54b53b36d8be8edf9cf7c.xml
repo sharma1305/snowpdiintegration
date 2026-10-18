@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+  <sys_atf_step action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>4e971fefcba54b53b36d8be8edf9cf7c</sys_id>
+    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <active>true</active>
+    <description/>
+    <display_name>Run Server Side Script</display_name>
+    <notes/>
+    <order>1</order>
+    <step_config>41de4a935332120028bc29cac2dc349a</step_config>
+    <table/>
+    <test>36ff011862254be9a093feaeb094735b</test>
+    <timeout/>
+    <warning_message/>
+    <sys_scope>fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_atf_step_4e971fefcba54b53b36d8be8edf9cf7c</sys_update_name>
+  </sys_atf_step>
+  <sys_variable_value action="delete_multiple" query="document_key=4e971fefcba54b53b36d8be8edf9cf7c"/>
+  <sys_variable_value action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>b44b6d71e4c34003a56034ffa10f7337</sys_id>
+    <document>sys_atf_step</document>
+    <document_key>4e971fefcba54b53b36d8be8edf9cf7c</document_key>
+    <value>3.1</value>
+    <variable>42f2564b73031300440211d8faf6a777</variable>
+    <order>100</order>
+    <sys_scope>fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_variable_value_b44b6d71e4c34003a56034ffa10f7337</sys_update_name>
+  </sys_variable_value>
+  <sys_variable_value action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>f3849194294140b5ab16a6ac1088d52c</sys_id>
+    <document>sys_atf_step</document>
+    <document_key>4e971fefcba54b53b36d8be8edf9cf7c</document_key>
+    <value>(function () {
+    // Create a test incident with SAP keywords to match existing incidents
+    var inc = new GlideRecord('incident');
+    inc.initialize();
+    inc.setValue('short_description', 'SAP application is not accessible - ATF test');
+    inc.setValue('description', 'Unable to access the SAP application. Getting connection error.');
+    inc.setValue('priority', '1');
+    inc.setValue('impact', '1');
+    inc.setValue('urgency', '1');
+    inc.setValue('category', 'software');
+    var incId = inc.insert();
+
+    if (!incId) {
+        throw new Error('Failed to create test incident');
+    }
+    gs.info('ATF: Test incident created: ' + incId);
+
+    try {
+        // Run the investigation service
+        var svc = new x_293053_ai_inci_0.InvestigationService(incId);
+
+        // Test 1: getIncidentContext
+        var context = svc.getIncidentContext();
+        if (!context || !context.short_description) {
+            throw new Error('getIncidentContext() returned invalid data');
+        }
+        gs.info('ATF: Incident context retrieved - ' + context.short_description);
+
+        // Test 2: findSimilarIncidents
+        var similar = svc.findSimilarIncidents(5);
+        gs.info('ATF: Found ' + similar.length + ' similar incidents');
+
+        // Test 3: searchKnowledgeArticles
+        var articles = svc.searchKnowledgeArticles(5);
+        gs.info('ATF: Found ' + articles.length + ' knowledge articles');
+
+        // Test 4: generateReport (full pipeline)
+        var reportId = svc.generateReport();
+        if (!reportId) {
+            throw new Error('generateReport() did not return a report ID');
+        }
+        gs.info('ATF: Investigation Report created: ' + reportId);
+
+        // Verify report record
+        var report = new GlideRecord('x_293053_ai_inci_0_inv_report');
+        if (!report.get(reportId)) {
+            throw new Error('Could not retrieve investigation report');
+        }
+
+        var status = report.getValue('status');
+        if (status !== 'completed') {
+            throw new Error('Report status is "' + status + '", expected "completed"');
+        }
+
+        var summary = report.getValue('summary');
+        if (!summary) {
+            throw new Error('Report summary is empty');
+        }
+
+        var confidence = parseInt(report.getValue('confidence_score'), 10);
+        if (isNaN(confidence) || confidence &lt; 0 || confidence &gt; 100) {
+            throw new Error('Invalid confidence score: ' + confidence);
+        }
+
+        gs.info('ATF: ✅ ALL TESTS PASSED');
+        gs.info('ATF: Report Status: ' + status);
+        gs.info('ATF: Confidence Score: ' + confidence + '%');
+        gs.info('ATF: Similar Incidents: ' + similar.length);
+        gs.info('ATF: Knowledge Articles: ' + articles.length);
+        gs.info('ATF: Summary: ' + summary);
+
+        // Cleanup report
+        report.deleteRecord();
+    } finally {
+        // Always cleanup test incident
+        var cleanup = new GlideRecord('incident');
+        if (cleanup.get(incId)) {
+            cleanup.deleteRecord();
+        }
+        gs.info('ATF: Cleanup completed');
+    }
+})();
+</value>
+    <variable>989d9e235324220002c6435723dc3484</variable>
+    <order>200</order>
+    <sys_scope>fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_variable_value_f3849194294140b5ab16a6ac1088d52c</sys_update_name>
+  </sys_variable_value>
+</record_update>
