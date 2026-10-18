@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+  <sys_script_include action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>44c934f7b48c4d0ebd6069d8f61c76d2</sys_id>
+    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+    <sys_update_name>sys_script_include_44c934f7b48c4d0ebd6069d8f61c76d2</sys_update_name>
+    <access>public</access>
+    <active>true</active>
+    <api_name>x_293053_ai_inci_0.TestDataSeeder</api_name>
+    <caller_access/>
+    <client_callable>false</client_callable>
+    <description>Seeds test data for the AI Investigation pipeline: 5 resolved SAP incidents, 3 published KB articles, and 1 P1 trigger incident. Run seedAll() to create, cleanup() to remove.</description>
+    <mobile_callable>false</mobile_callable>
+    <name>TestDataSeeder</name>
+    <sandbox_callable>false</sandbox_callable>
+    <script><![CDATA[var TestDataSeeder = Class.create()
+TestDataSeeder.prototype = {
+    initialize: function () {
+        this.createdRecords = {
+            resolvedIncidents: [],
+            knowledgeArticles: [],
+            triggerIncident: null,
+        }
+    },
+
+    /**
+     * Seeds all test data: resolved incidents, KB articles, and a trigger incident.
+     * Returns a summary object with sys_ids of all created records.
+     */
+    seedAll: function () {
+        gs.info('TestDataSeeder: Starting test data seeding...')
+
+        this._createResolvedIncidents()
+        this._createKnowledgeArticles()
+        this._createTriggerIncident()
+
+        gs.info('TestDataSeeder: ✅ Seeding complete!')
+        gs.info('TestDataSeeder: Created ' + this.createdRecords.resolvedIncidents.length + ' resolved incidents')
+        gs.info('TestDataSeeder: Created ' + this.createdRecords.knowledgeArticles.length + ' knowledge articles')
+        gs.info('TestDataSeeder: Trigger incident: ' + this.createdRecords.triggerIncident)
+
+        return this.createdRecords
+    },
+
+    /**
+     * Cleans up all test data created by this seeder.
+     */
+    cleanup: function () {
+        gs.info('TestDataSeeder: Cleaning up test data...')
+        var deleted = 0
+
+        // Delete test incidents
+        var gr = new GlideRecord('incident')
+        gr.addQuery('number', 'STARTSWITH', 'INC999')
+        gr.query()
+        while (gr.next()) {
+            gr.deleteRecord()
+            deleted++
+        }
+
+        // Delete test KB articles
+        gr = new GlideRecord('kb_knowledge')
+        gr.addQuery('number', 'STARTSWITH', 'KB999')
+        gr.query()
+        while (gr.next()) {
+            gr.deleteRecord()
+            deleted++
+        }
+
+        // Delete any investigation reports linked to test incidents
+        gr = new GlideRecord('x_293053_ai_inci_0_inv_report')
+        gr.query()
+        while (gr.next()) {
+            gr.deleteRecord()
+            deleted++
+        }
+
+        gs.info('TestDataSeeder: Cleaned up ' + deleted + ' records')
+        return deleted
+    },
+
+    _createResolvedIncidents: function () {
+        var incidents = [
+            {
+                number: 'INC9990001',
+                short_description: 'SAP application login failure - connection timeout',
+                description: 'Users are unable to log into the SAP application. The login page loads but after entering credentials, the connection times out. Restarting the SAP application server resolved the issue.',
+                state: '6',
+                close_notes: 'Root cause: SAP application server memory leak caused connection pool exhaustion. Resolution: Restarted SAP app server and increased connection pool size from 50 to 100. Applied SAP patch SP-2024-0456.',
+                priority: '1',
+                impact: '1',
+                urgency: '1',
+                category: 'software',
+            },
+            {
+                number: 'INC9990002',
+                short_description: 'SAP HR module not accessible after maintenance window',
+                description: 'Following scheduled maintenance, the SAP HR module is returning 503 errors. Multiple users across departments affected.',
+                state: '7',
+                close_notes: 'Root cause: During maintenance, the SAP HR service endpoint URL was updated but the load balancer configuration was not refreshed. Resolution: Updated load balancer health check endpoints and restarted the HAProxy service.',
+                priority: '1',
+                impact: '1',
+                urgency: '1',
+                category: 'software',
+            },
+            {
+                number: 'INC9990003',
+                short_description: 'Cannot access SAP Financial Accounting - authentication error',
+                description: 'SAP Financial Accounting application returns authentication failed error. LDAP sync appears to be working for other applications.',
+                state: '6',
+                close_notes: 'Root cause: SAP SSO certificate expired. Resolution: Renewed the SAML certificate in SAP Identity Provider settings and updated the trust relationship. Users were able to access the application after clearing browser cache.',
+                priority: '2',
+                impact: '2',
+                urgency: '1',
+                category: 'software',
+            },
+            {
+                number: 'INC9990004',
+                short_description: 'SAP application performance degradation - slow response times',
+                description: 'SAP application is extremely slow. Page load times exceeding 30 seconds. Users report timeouts during peak hours.',
+                state: '7',
+                close_notes: 'Root cause: Long-running batch job consuming excessive database resources. Resolution: Rescheduled batch processing to off-peak hours, added database indexes on SAP tables, increased application server thread pool. Response times now under 2 seconds.',
+                priority: '2',
+                impact: '2',
+                urgency: '2',
+                category: 'software',
+            },
+            {
+                number: 'INC9990005',
+                short_description: 'Network connectivity issue preventing SAP access',
+                description: 'Multiple users in Building B unable to access SAP applications. Other internet services working normally. VPN users not affected.',
+                state: '6',
+                close_notes: 'Root cause: Firewall rule change blocked traffic on port 3300 (SAP dispatcher). Resolution: Updated firewall ACL to allow SAP dispatcher traffic. Added SAP port range (3200-3399) to protected service list.',
+                priority: '1',
+                impact: '1',
+                urgency: '1',
+                category: 'network',
+            },
+        ]
+
+        for (var i = 0; i < incidents.length; i++) {
+            var data = incidents[i]
+            // Check if already exists
+            var existing = new GlideRecord('incident')
+            existing.addQuery('number', data.number)
+            existing.query()
+            if (existing.hasNext()) {
+                gs.info('TestDataSeeder: ' + data.number + ' already exists, skipping')
+                continue
+            }
+
+            var gr = new GlideRecord('incident')
+            gr.initialize()
+            gr.setValue('number', data.number)
+            gr.setValue('short_description', data.short_description)
+            gr.setValue('description', data.description)
+            gr.setValue('state', data.state)
+            gr.setValue('close_notes', data.close_notes)
+            gr.setValue('priority', data.priority)
+            gr.setValue('impact', data.impact)
+            gr.setValue('urgency', data.urgency)
+            gr.setValue('category', data.category)
+            gr.setValue('active', false)
+            var id = gr.insert()
+            if (id) {
+                this.createdRecords.resolvedIncidents.push(data.number)
+                gs.info('TestDataSeeder: Created ' + data.number + ' (' + data.short_description + ')')
+            }
+        }
+    },
+
+    _createKnowledgeArticles: function () {
+        var kbBaseId = 'a7e8a78bff0221009b20ffffffffff17' // IT Knowledge Base
+
+        var articles = [
+            {
+                number: 'KB9990001',
+                short_description: 'Troubleshooting SAP application access issues',
+                text: '<p><strong>SAP Application Access Troubleshooting Guide</strong></p><p>If you are unable to access the SAP application, follow these steps:</p><ol><li><strong>Verify network connectivity:</strong> Ensure you can reach the SAP server. Check that ports 3200-3399 are not blocked by your local firewall.</li><li><strong>Check credentials:</strong> Verify your SAP credentials are valid. Reset password via SAP Identity Management portal if expired.</li><li><strong>Clear browser cache:</strong> SAP Web GUI can cache stale session tokens. Clear cache and cookies, then retry.</li><li><strong>Check SAP server status:</strong> Visit the SAP System Status dashboard to confirm all modules are operational.</li><li><strong>VPN requirement:</strong> If working remotely, ensure VPN is connected before accessing SAP.</li></ol><p>If the issue persists, escalate to the SAP Basis team.</p>',
+            },
+            {
+                number: 'KB9990002',
+                short_description: 'SAP SSO certificate renewal procedure',
+                text: '<p><strong>SAP Single Sign-On Certificate Renewal</strong></p><p>SAP SSO certificates expire annually. Symptoms: users get Authentication Failed errors, SAP login page rejects credentials, other LDAP apps work fine.</p><h3>Resolution</h3><ol><li>Log into SAP Identity Provider admin console</li><li>Navigate to SAML Configuration > Service Provider Certificates</li><li>Generate new X.509 certificate</li><li>Upload to SAP Trust Manager</li><li>Restart SAP ICM service</li><li>Ask users to clear browser cache</li></ol><p><strong>Prevention:</strong> Set reminder 30 days before certificate expiry.</p>',
+            },
+            {
+                number: 'KB9990003',
+                short_description: 'SAP application server restart procedure and health checks',
+                text: '<p><strong>SAP Application Server Restart Procedure</strong></p><p>Use this when SAP needs restart due to performance issues or memory leaks.</p><h3>Pre-Restart</h3><ul><li>Notify affected users</li><li>Verify no critical batch jobs running (SM37)</li><li>Check active sessions (SM04)</li></ul><h3>Restart Steps</h3><ol><li>SSH to SAP server</li><li>Stop: sapcontrol -nr 00 -function Stop</li><li>Start: sapcontrol -nr 00 -function Start</li><li>Monitor: sapcontrol -nr 00 -function GetProcessList</li><li>Verify GREEN status</li></ol><h3>Post-Restart</h3><ul><li>Check dispatcher on port 3200</li><li>Verify ICM service (SMICM)</li><li>Test client login</li></ul>',
+            },
+        ]
+
+        for (var j = 0; j < articles.length; j++) {
+            var art = articles[j]
+            var existing = new GlideRecord('kb_knowledge')
+            existing.addQuery('number', art.number)
+            existing.query()
+            if (existing.hasNext()) {
+                gs.info('TestDataSeeder: ' + art.number + ' already exists, skipping')
+                continue
+            }
+
+            var kb = new GlideRecord('kb_knowledge')
+            kb.initialize()
+            kb.setValue('number', art.number)
+            kb.setValue('short_description', art.short_description)
+            kb.setValue('text', art.text)
+            kb.setValue('workflow_state', 'published')
+            kb.setValue('kb_knowledge_base', kbBaseId)
+            var kbId = kb.insert()
+            if (kbId) {
+                this.createdRecords.knowledgeArticles.push(art.number)
+                gs.info('TestDataSeeder: Created ' + art.number + ' (' + art.short_description + ')')
+            }
+        }
+    },
+
+    _createTriggerIncident: function () {
+        // Check if trigger already exists
+        var existing = new GlideRecord('incident')
+        existing.addQuery('number', 'INC9990099')
+        existing.query()
+        if (existing.hasNext()) {
+            existing.next()
+            this.createdRecords.triggerIncident = existing.getUniqueValue()
+            gs.info('TestDataSeeder: INC9990099 already exists: ' + this.createdRecords.triggerIncident)
+            return
+        }
+
+        var gr = new GlideRecord('incident')
+        gr.initialize()
+        gr.setValue('number', 'INC9990099')
+        gr.setValue('short_description', 'SAP application is down - users cannot access any SAP modules')
+        gr.setValue('description', 'Received multiple reports that the SAP application is completely inaccessible. Users across all departments are affected. The SAP login page returns a connection refused error. This started approximately 30 minutes ago. No recent changes were deployed.')
+        gr.setValue('state', '1')
+        gr.setValue('priority', '1')
+        gr.setValue('impact', '1')
+        gr.setValue('urgency', '1')
+        gr.setValue('category', 'software')
+        gr.setValue('active', true)
+        var id = gr.insert()
+        if (id) {
+            this.createdRecords.triggerIncident = id
+            gs.info('TestDataSeeder: Created trigger incident INC9990099: ' + id)
+        }
+    },
+
+    type: 'TestDataSeeder',
+}
+]]></script>
+    <sys_name>TestDataSeeder</sys_name>
+  </sys_script_include>
+</record_update>
