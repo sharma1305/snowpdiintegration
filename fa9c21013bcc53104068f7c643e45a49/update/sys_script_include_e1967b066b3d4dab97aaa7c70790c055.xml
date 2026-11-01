@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
-  <sys_script_include action="INSERT_OR_UPDATE" apply_defaults="true">
-    <sys_id>e1967b066b3d4dab97aaa7c70790c055</sys_id>
-    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
-    <sys_update_name>sys_script_include_e1967b066b3d4dab97aaa7c70790c055</sys_update_name>
-    <access>public</access>
-    <active>true</active>
-    <api_name>x_293053_ai_inci_0.InvestigationService</api_name>
-    <caller_access/>
-    <client_callable>false</client_callable>
-    <description>AI-powered incident investigation service that finds similar incidents, searches knowledge articles, and generates investigation reports.</description>
-    <mobile_callable>false</mobile_callable>
-    <name>InvestigationService</name>
-    <sandbox_callable>false</sandbox_callable>
-    <script><![CDATA[var InvestigationService = Class.create()
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_293053_ai_inci_0.InvestigationService</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>AI-powered incident investigation service that finds similar incidents, searches knowledge articles, and generates investigation reports.</description>
+        <mobile_callable>false</mobile_callable>
+        <name>InvestigationService</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var InvestigationService = Class.create()
 InvestigationService.prototype = {
     initialize: function (incidentSysId) {
         this.incidentSysId = incidentSysId
@@ -266,6 +263,17 @@ InvestigationService.prototype = {
     type: 'InvestigationService',
 }
 ]]></script>
-    <sys_name>InvestigationService</sys_name>
-  </sys_script_include>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>sunsharl</sys_created_by>
+        <sys_created_on>2026-10-18 19:56:36</sys_created_on>
+        <sys_id>e1967b066b3d4dab97aaa7c70790c055</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>InvestigationService</sys_name>
+        <sys_package display_value="AI Incident Investigator" source="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI Incident Investigator">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+        <sys_update_name>sys_script_include_e1967b066b3d4dab97aaa7c70790c055</sys_update_name>
+        <sys_updated_by>sunsharl</sys_updated_by>
+        <sys_updated_on>2026-10-18 19:56:36</sys_updated_on>
+    </sys_script_include>
 </record_update>

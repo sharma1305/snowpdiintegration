@@ -1,31 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-  <sys_ui_form_sections form_id="eda2be653ed64a41859f33fedb38f611" sys_domain="global" table="x_293053_ai_inci_0_inv_report">
-    <sys_ui_form_section action="INSERT_OR_UPDATE" apply_defaults="true">
-      <position>0</position>
-      <sys_id>57d7f8d961b448389dcecfdc893b4e94</sys_id>
-      <sys_ui_form display_value="x_293053_ai_inci_0_inv_report" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">eda2be653ed64a41859f33fedb38f611</sys_ui_form>
-      <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
-    </sys_ui_form_section>
-    <sys_ui_form_section action="INSERT_OR_UPDATE" apply_defaults="true">
-      <position>1</position>
-      <sys_id>a73483cf5c474eed9b82a5f4ddd7bd7e</sys_id>
-      <sys_ui_form display_value="x_293053_ai_inci_0_inv_report" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">eda2be653ed64a41859f33fedb38f611</sys_ui_form>
-      <sys_ui_section caption="AI Findings" display_value="AI Findings" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">73eccb03dd4b46a7b3d5f4aefa947cec</sys_ui_section>
-    </sys_ui_form_section>
-    <sys_ui_form_section action="INSERT_OR_UPDATE" apply_defaults="true">
-      <position>2</position>
-      <sys_id>0ac2f2c628ba499faafc7ccfe426adf9</sys_id>
-      <sys_ui_form display_value="x_293053_ai_inci_0_inv_report" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">eda2be653ed64a41859f33fedb38f611</sys_ui_form>
-      <sys_ui_section caption="Investigation Notes" display_value="Investigation Notes" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">5e601cda87e94ba2bb10d10a9a77be2f</sys_ui_section>
-    </sys_ui_form_section>
-    <sys_ui_form action="INSERT_OR_UPDATE" apply_defaults="true">
-      <name>x_293053_ai_inci_0_inv_report</name>
-      <roles/>
-      <sys_id>eda2be653ed64a41859f33fedb38f611</sys_id>
-      <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
-      <sys_user/>
-      <view display_value="Default view" name="NULL">Default view</view>
-      <view_name/>
-    </sys_ui_form>
-  </sys_ui_form_sections>
+    <sys_ui_form_sections form_id="eda2be653ed64a41859f33fedb38f611" sys_domain="global" table="x_293053_ai_inci_0_inv_report" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>57d7f8d961b448389dcecfdc893b4e94</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_293053_ai_inci_0_inv_report" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">eda2be653ed64a41859f33fedb38f611</sys_ui_form>
+            <sys_ui_section caption="Investigation Details" display_value="Investigation Details" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">f493da49c60c45a5ab52444d95bc5bc1</sys_ui_section>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:49</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a73483cf5c474eed9b82a5f4ddd7bd7e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_293053_ai_inci_0_inv_report" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">eda2be653ed64a41859f33fedb38f611</sys_ui_form>
+            <sys_ui_section caption="AI Findings" display_value="AI Findings" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">73eccb03dd4b46a7b3d5f4aefa947cec</sys_ui_section>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:49</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>2</position>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0ac2f2c628ba499faafc7ccfe426adf9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_293053_ai_inci_0_inv_report" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">eda2be653ed64a41859f33fedb38f611</sys_ui_form>
+            <sys_ui_section caption="Investigation Notes" display_value="Investigation Notes" name="x_293053_ai_inci_0_inv_report" sys_domain="global" view="Default view">5e601cda87e94ba2bb10d10a9a77be2f</sys_ui_section>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:49</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 19:56:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>eda2be653ed64a41859f33fedb38f611</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_293053_ai_inci_0_inv_report</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="AI Incident Investigator" source="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="AI Incident Investigator">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+            <sys_update_name>sys_ui_form_sections_eda2be653ed64a41859f33fedb38f611</sys_update_name>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 19:56:36</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
 </record_update>

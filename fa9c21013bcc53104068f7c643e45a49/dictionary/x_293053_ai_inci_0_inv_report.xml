@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="enforce_dot_walk_cross_scope_access=true" db_object_id="6c2aa4411a1a4224af6671a1b297c092" label="Investigation Report" name="x_293053_ai_inci_0_inv_report" type="collection">
+        <element label="Summary" max_length="4000" name="summary" type="multi_two_lines"/>
+        <element label="Incident" mandatory="true" name="incident" reference="incident" type="reference"/>
+        <element label="Suggested Next Steps" max_length="4000" name="suggested_next_steps" type="multi_two_lines"/>
+        <element label="Confidence Score" name="confidence_score" type="integer"/>
+        <element label="Status" name="status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Failed" sequence="4" value="failed"/>
+                <element inactive_on_update="false" label="Completed" sequence="3" value="completed"/>
+                <element inactive_on_update="false" label="In Progress" sequence="2" value="in_progress"/>
+                <element inactive_on_update="false" label="Pending" sequence="1" value="pending"/>
+            </choice>
+        </element>
+        <element label="Knowledge Results" max_length="8000" name="knowledge_results" type="multi_two_lines"/>
+        <element label="Similar Incidents" max_length="8000" name="similar_incidents" type="multi_two_lines"/>
+        <element label="Investigation Notes" name="investigation_notes" type="journal_input"/>
+        <element default="javascript:getNextObjNumberPadded();" display="true" label="Number" name="number" type="string"/>
+        <index name="index">
+            <element name="incident"/>
+        </index>
+    </element>
+</database>

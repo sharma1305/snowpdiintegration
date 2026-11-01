@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_definition">
-  <sys_ws_definition action="INSERT_OR_UPDATE" apply_defaults="true">
-    <sys_id>4c76e659a0434d379243aa42f845a578</sys_id>
-    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
-    <sys_update_name>sys_ws_definition_4c76e659a0434d379243aa42f845a578</sys_update_name>
-    <active>true</active>
-    <base_uri>/api/x_293053_ai_inci_0/ai_investigation</base_uri>
-    <consumes>application/json</consumes>
-    <consumes_customized>true</consumes_customized>
-    <default_version>v1</default_version>
-    <doc_link/>
-    <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
-    <is_versioned>true</is_versioned>
-    <name>AI Investigation API</name>
-    <namespace>x_293053_ai_inci_0</namespace>
-    <produces>application/json</produces>
-    <produces_customized>true</produces_customized>
-    <service_id>ai_investigation</service_id>
-    <short_description/>
-    <sys_policy/>
-  </sys_ws_definition>
+    <sys_ws_definition action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <base_uri>/api/x_293053_ai_inci_0/ai_investigation</base_uri>
+        <consumes>application/json</consumes>
+        <consumes_customized>true</consumes_customized>
+        <default_version>v1</default_version>
+        <doc_link/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <is_versioned>true</is_versioned>
+        <name>AI Investigation API</name>
+        <namespace>x_293053_ai_inci_0</namespace>
+        <produces>application/json</produces>
+        <produces_customized>true</produces_customized>
+        <service_id>ai_investigation</service_id>
+        <short_description/>
+        <sys_class_name>sys_ws_definition</sys_class_name>
+        <sys_created_by>sunsharl</sys_created_by>
+        <sys_created_on>2026-10-18 19:56:37</sys_created_on>
+        <sys_id>4c76e659a0434d379243aa42f845a578</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AI Investigation API</sys_name>
+        <sys_package display_value="AI Incident Investigator" source="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI Incident Investigator">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+        <sys_update_name>sys_ws_definition_4c76e659a0434d379243aa42f845a578</sys_update_name>
+        <sys_updated_by>sunsharl</sys_updated_by>
+        <sys_updated_on>2026-10-18 19:56:37</sys_updated_on>
+    </sys_ws_definition>
 </record_update>

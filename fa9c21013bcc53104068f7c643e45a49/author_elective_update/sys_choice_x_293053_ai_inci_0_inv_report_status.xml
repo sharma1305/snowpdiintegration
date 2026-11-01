@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="status" table="x_293053_ai_inci_0_inv_report" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>status</element>
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 19:56:30</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>status</sys_name>
+            <sys_package display_value="AI Incident Investigator" source="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="AI Incident Investigator">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+            <sys_update_name>sys_choice_x_293053_ai_inci_0_inv_report_status</sys_update_name>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 19:56:30</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Pending</label>
+            <language>en</language>
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:47</sys_updated_on>
+            <value>pending</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>In Progress</label>
+            <language>en</language>
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:47</sys_updated_on>
+            <value>in_progress</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Completed</label>
+            <language>en</language>
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:47</sys_updated_on>
+            <value>completed</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Failed</label>
+            <language>en</language>
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 20:08:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 20:08:47</sys_updated_on>
+            <value>failed</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
-  <sys_ws_operation action="INSERT_OR_UPDATE" apply_defaults="true">
-    <sys_id>d60318b671cd41fd9ddd57abe8e2ddfa</sys_id>
-    <sys_scope display_value="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_scope>
-    <sys_update_name>sys_ws_operation_d60318b671cd41fd9ddd57abe8e2ddfa</sys_update_name>
-    <active>true</active>
-    <consumes>application/json</consumes>
-    <consumes_customized>false</consumes_customized>
-    <default_operation_uri>/api/x_293053_ai_inci_0/ai_investigation/investigate/{incident_id}</default_operation_uri>
-    <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
-    <http_method>POST</http_method>
-    <name>Trigger Investigation</name>
-    <operation_script><![CDATA[(function process(request, response) {
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri>/api/x_293053_ai_inci_0/ai_investigation/investigate/{incident_id}</default_operation_uri>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Trigger Investigation</name>
+        <operation_script><![CDATA[(function process(request, response) {
     try {
         var incidentId = request.pathParams.incident_id;
 
@@ -51,17 +48,29 @@
     }
 })(request, response);
 ]]></operation_script>
-    <operation_uri>/api/x_293053_ai_inci_0/v1/ai_investigation/investigate/{incident_id}</operation_uri>
-    <produces>application/json</produces>
-    <produces_customized>false</produces_customized>
-    <relative_path>/investigate/{incident_id}</relative_path>
-    <request_example/>
-    <requires_acl_authorization>true</requires_acl_authorization>
-    <requires_authentication>true</requires_authentication>
-    <requires_snc_internal_role>true</requires_snc_internal_role>
-    <short_description/>
-    <sys_policy/>
-    <web_service_definition>4c76e659a0434d379243aa42f845a578</web_service_definition>
-    <web_service_version>b8a1a768910c4fc682cbacb299ab6ecb</web_service_version>
-  </sys_ws_operation>
+        <operation_uri>/api/x_293053_ai_inci_0/v1/ai_investigation/investigate/{incident_id}</operation_uri>
+        <produces>application/json</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/investigate/{incident_id}</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <support_trailing_slash>false</support_trailing_slash>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>sunsharl</sys_created_by>
+        <sys_created_on>2026-10-18 19:56:37</sys_created_on>
+        <sys_id>d60318b671cd41fd9ddd57abe8e2ddfa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Trigger Investigation</sys_name>
+        <sys_package display_value="AI Incident Investigator" source="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="AI Incident Investigator">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+        <sys_update_name>sys_ws_operation_d60318b671cd41fd9ddd57abe8e2ddfa</sys_update_name>
+        <sys_updated_by>sunsharl</sys_updated_by>
+        <sys_updated_on>2026-10-18 19:56:37</sys_updated_on>
+        <web_service_definition display_value="AI Investigation API">4c76e659a0434d379243aa42f845a578</web_service_definition>
+        <web_service_version display_value="v1">b8a1a768910c4fc682cbacb299ab6ecb</web_service_version>
+    </sys_ws_operation>
 </record_update>

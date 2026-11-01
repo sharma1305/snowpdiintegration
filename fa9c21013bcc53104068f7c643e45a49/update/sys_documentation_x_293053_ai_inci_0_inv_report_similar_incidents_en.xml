@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="similar_incidents" label="Similar Incidents" language="en" table="x_293053_ai_inci_0_inv_report">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>similar_incidents</element>
+            <help/>
+            <hint/>
+            <label>Similar Incidents</label>
+            <language>en</language>
+            <name>x_293053_ai_inci_0_inv_report</name>
+            <plural>Similar Incidents</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>sunsharl</sys_created_by>
+            <sys_created_on>2026-10-18 19:56:33</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Similar Incidents</sys_name>
+            <sys_package display_value="AI Incident Investigator" source="x_293053_ai_inci_0">fa9c21013bcc53104068f7c643e45a49</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="AI Incident Investigator">fa9c21013bcc53104068f7c643e45a49</sys_scope>
+            <sys_update_name>sys_documentation_x_293053_ai_inci_0_inv_report_similar_incidents_en</sys_update_name>
+            <sys_updated_by>sunsharl</sys_updated_by>
+            <sys_updated_on>2026-10-18 19:56:33</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
